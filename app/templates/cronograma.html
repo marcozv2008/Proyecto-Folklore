@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cronograma</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cronograma.css') }}">
+</head>
+<body>
+  <div id="barra-superior">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    </a>
+    <a id="boton-cronograma" href="{{ url_for('Cronograma') }}">Ver cronograma</a>
+  </div>
+
+  <main id="contenedor-cronograma">
+    <div id="fechas"></div>
+    <div id="panel-eventos"></div>
+  </main>
+
+  <footer>© Epsilon consultora</footer>
+  <script src="{{ url_for('static', filename='js/cronograma.js') }}"></script>
+</body>
+</html>

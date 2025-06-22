@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div id="barra-superior">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    </a>
+    <a id="boton-cronograma" href="{{ url_for('Cronograma') }}">Ver cronograma</a>
+  </div>
+
+  <main id="contenedor-principal">
+    <div class="caja-login">
+      <div class="logo-empresa">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo de la empresa">
+      </div>
+      <h1>Iniciar sesión</h1>
+      <p class="subtitulo">Ingresa tus datos para continuar</p>
+    <div class="formulario">
+      <form action="{{ url_for('Login') }}" method="POST">
+        <div class="grupo-input">
+          <div class="icono"></div>
+          <input type="text" name="username" required>
+        </div>
+        <div class="grupo-input">
+          <div class="icono"></div>
+          <input type="password" name="password" required>
+        </div>
+        <button class="boton-ingresar" type="submit">Ingresar</button>
+      </form>
+    </div>
+    </div>
+  </main>
+
+  <footer>© Epsilon consultora</footer>
+</body>
+</html>

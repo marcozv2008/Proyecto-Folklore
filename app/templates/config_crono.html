@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Configurar Cronograma</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/config_crono.css') }}" />
+</head>
+<body>
+  <div id="barra-superior">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+    <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    </a>
+    <h1>Configuración del Cronograma</h1>
+  </div>
+
+  <main>
+    <section id="formulario-config">
+      <h2>Agregar o Editar Banda</h2>
+      <form id="form-evento">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" required>
+
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" required>
+
+        <label for="nombre">Nombre de la banda:</label>
+        <input type="text" id="nombre" required>
+
+        <label for="integrantes">Cantidad de integrantes:</label>
+        <input type="number" id="integrantes" min="1" required>
+
+        <div class="botones-formulario">
+          <button type="submit">Guardar</button>
+          <button type="button" id="cancelar-edicion">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="lista-eventos">
+      <h2>Eventos programados</h2>
+      <div id="contenedor-eventos"></div>
+    </section>
+  </main>
+
+  <footer>
+    © Epsilon consultora
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/config_crono.js') }}"></script>
+</body>
+</html>
