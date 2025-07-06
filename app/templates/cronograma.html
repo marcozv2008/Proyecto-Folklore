@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cronograma</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cronograma.css') }}">
+</head>
+<body>
+  <div id="barra-superior">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    </a>
+    <a id="boton-cronograma" href="{{ url_for('Cronograma') }}">Ver cronograma</a>
+  </div>
+
+  <main id="contenedor-cronograma">
+    <div id="fechas">
+  <form method="get" action="{{ url_for('Cronograma') }}">
+    {% for fecha in eventos|sort %}
+      <button
+        type="submit"
+        name="fecha"
+        value="{{ fecha }}"
+        class="fecha{% if fecha == fecha_seleccionada %} activo{% endif %}">
+        {{ fecha[8:10] }}/{{ fecha[5:7] }}
+      </button>
+    {% endfor %}
+  </form>
+</div>
+    <div id="panel-eventos">
+  {% if eventos[fecha_seleccionada] %}
+    {% for banda in eventos[fecha_seleccionada]|sort(attribute='hora') %}
+      <div class="banda-card">
+        <div class="banda-nombre">{{ banda.nombre }}</div>
+        <div class="banda-hora">{{ banda.hora }} hs</div>
+        <div class="banda-integrantes">Integrantes: {{ banda.integrantes }}</div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Este día no hay eventos programados.</p>
+  {% endif %}
+</div>
+  </main>
+
+  <footer>© Epsilon consultora</footer>
+</body>
+</html>

@@ -1,0 +1,172 @@
+/* Reset y estructura base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../img/fondo.png");
+  background-color: #CC4F4F;
+  background-repeat: repeat;
+  background-size: 2000px;
+  background-position: top;
+  background-blend-mode: multiply;
+  color: #682727;
+}
+
+/* Barra superior */
+#barra-superior {
+  background-color: #FFF8F8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 8px solid #BD2929;
+}
+
+#boton-inicio img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #FFF1F1;
+  padding: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+#boton-inicio:hover {
+  background-color: #ffe5e5;
+}
+
+#boton-cronograma {
+  background-color: #BD2929;
+  color: #FFF8F8;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Contenedor principal */
+#contenedor-principal {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Caja de login */
+.caja-login {
+  background-color: #FFF8F8;
+  border: 10px solid #BD2929;
+  padding: 30px 40px;
+  width: 320px;
+  text-align: center;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 15px;
+  min-height: 480px;
+}
+
+/* Logo */
+.logo-empresa {
+  width: 120%;
+  max-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-empresa img {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+}
+
+/* Texto */
+h1 {
+  font-family: cursive;
+  font-size: 24px;
+  margin: 0;
+}
+
+.subtitulo {
+  font-size: 12px;
+  color: #CC4F4F;
+  margin-bottom: 10px;
+}
+
+/* Formulario */
+.formulario {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+/* Inputs */
+.grupo-input {
+  display: flex;
+  align-items: center;
+  background-color: #FFF8F8;
+  border: 2px solid #BD2929;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.grupo-input .icono {
+  background: url("../img/icono-input.png") no-repeat center;
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  margin-right: 5px;
+}
+
+.grupo-input input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-family: monospace;
+  color: #BD2929;
+  background: transparent;
+}
+
+/* Botón */
+.boton-ingresar {
+  width: 100%;
+  background-color: #BD2929;
+  color: #FFF8F8;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+/* Footer */
+footer {
+  background-color: #FFF8F8;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 12px;
+  color: #BD2929;
+  border-top: 10px solid #BD2929;
+  margin-top: auto;
+}

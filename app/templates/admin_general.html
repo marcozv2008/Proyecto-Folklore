@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_general.css') }}">
+</head>
+<body>
+  <div id="barra-superior">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    </a>
+    <a id="boton-cronograma" href="{{ url_for('Cronograma') }}">Ver cronograma</a>
+  </div>
+
+  <main id="contenedor-principal">
+    <div class="cuadro-central">
+      <h1 class="titulo-colorido">Panel de Administración</h1>
+      <nav class="links-panel">
+        <a href="#">Configurar estadio</a>
+        <a href="{{ url_for('ConfigCrono') }}">Configurar cronograma</a>
+        <a href="#">Configurar POS</a>
+        <a href="#">Configurar entradas</a>
+      </nav>
+    </div>
+  </main>
+
+  <footer>© Epsilon consultora</footer>
+</body>
+</html>

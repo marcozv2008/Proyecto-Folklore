@@ -1,0 +1,21 @@
+{
+  "2025-07-06": [
+    {
+      "nombre": "Los Redondos",
+      "hora": "21:04",
+      "integrantes": 5
+    },
+    {
+      "nombre": "La Renga",
+      "hora": "20:04",
+      "integrantes": 5
+    }
+  ],
+  "2025-07-07": [
+    {
+      "nombre": "nose",
+      "hora": "20:00",
+      "integrantes": 10
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+/* Estructura base para mantener el footer abajo */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  background-image: url("../img/fondo.png");
+  background-color: #CC4F4F;
+  background-repeat: repeat;
+  background-size: 2000px;
+  background-position: top;
+  background-blend-mode: multiply;
+  color: #682727;
+}
+
+/* Barra superior */
+#barra-superior {
+  background-color: #FFF8F8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 8px solid #BD2929;
+}
+
+#boton-inicio img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #FFF1F1;
+  padding: 5px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+#boton-inicio:hover {
+  background-color: #ffe5e5;
+}
+
+#boton-cronograma {
+  background-color: #BD2929;
+  color: #FFF8F8;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* Contenedor principal */
+#contenedor-principal {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Cuadro central con título y enlaces */
+.cuadro-central {
+  background-color: #FFF1F1;
+  border: 7px solid #BD2929;
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.titulo-colorido {
+  color: #BD2929;
+  
+  padding-bottom: 10px;
+  background-color: #FFF1F1;
+  font-size: 40px;
+  margin-top: 3px;
+}
+
+.links-panel a {
+  display: block;
+  margin: 8px 0;
+  color: #682727;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+.links-panel a:hover {
+  color: #BD2929;
+  transform: scale(1.334);
+background-color: #ffafaf;
+}
+
+/* Footer */
+footer {
+  background-color: #FFF8F8;
+  text-align: left;
+  padding: 15px 20px;
+  font-size: 12px;
+  color: #BD2929;
+  border-top: 10px solid #BD2929;
+}
