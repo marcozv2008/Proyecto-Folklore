@@ -1,4 +1,6 @@
 /* Estructura base para mantener el footer abajo */
+
+
 html, body {
   height: 100%;
   margin: 0;
@@ -7,7 +9,7 @@ html, body {
   flex-direction: column;
 
   background-image: url("../img/fondo.png");
-  background-color: #CC4F4F;
+  background-color: #d44242;
   background-repeat: repeat;
   background-size: 2000px;
   background-position: top;
@@ -42,11 +44,23 @@ html, body {
 #boton-cronograma {
   background-color: #BD2929;
   color: #FFF8F8;
-  padding: 8px 16px;
+  padding: 20px 16px;
   text-decoration: none;
   border-radius: 5px;
   font-family: monospace;
   font-weight: bold;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: monospace;
+  cursor: pointer;
+  font-size: 17px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+#boton-cronograma:hover {
+  transform: scale(1.05); /* Aumenta un 5% el tamaño */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra para más efecto */
 }
 
 /* Contenedor principal */
