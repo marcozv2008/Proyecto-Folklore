@@ -4,49 +4,108 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Configurar Cronograma</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/config_crono.css') }}" />
+  <link rel="stylesheet" href="css/configuracion_del_cronograma.css" />
 </head>
 <body>
   <div id="barra-superior">
-    <a id="boton-inicio" href="{{ url_for('index') }}">
-    <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
+    <a id="boton-inicio" href="">
+      <img src="img/inicio.png" alt="Inicio" />
     </a>
     <h1>Configuración del Cronograma</h1>
   </div>
 
   <main>
+    <!-- agregar nuevo día -->
     <section id="formulario-config">
-      <h2>Agregar o Editar Banda</h2>
-      <form id="form-evento">
+      <h2>AGREGAR UNA NUEVA NOCHE</h2>
+      <form>
         <label for="fecha">Fecha:</label>
         <input type="date" id="fecha" required>
-
-        <label for="hora">Hora:</label>
-        <input type="time" id="hora" required>
-
-        <label for="nombre">Nombre de la banda:</label>
-        <input type="text" id="nombre" required>
-
-        <label for="integrantes">Cantidad de integrantes:</label>
-        <input type="number" id="integrantes" min="1" required>
-
+        <label for="hora-inicio">Hora inicio:</label>
+        <input type="time" id="hora-inicio" required>
         <div class="botones-formulario">
           <button type="submit">Guardar</button>
-          <button type="button" id="cancelar-edicion">Cancelar</button>
+          <button type="button">Cancelar</button>
         </div>
       </form>
+
+      <h2>NOCHES</h2>
+      <!-- NOCHES -->
+      <div class="banda-item">
+        <strong>14/07/2025</strong>
+        <div class="botones-noche">
+          <button type="submit">Ver</button>
+          <button type="button">Eliminar</button>
+        </div>
+      </div>
+      <div class="banda-item">
+        <strong>15/07/2025</strong>
+        <div class="botones-noche">
+          <button type="submit">Ver</button>
+          <button type="button">Eliminar</button>
+        </div>
+      </div>
+      <div class="banda-item">
+        <strong>16/07/2025</strong>
+        <div class="botones-noche">
+          <button type="submit">Ver</button>
+          <button type="button">Eliminar</button>
+        </div>
+      </div>
     </section>
 
+    <!-- eventos programados -->
     <section id="lista-eventos">
-      <h2>Eventos programados</h2>
-      <div id="contenedor-eventos"></div>
+      <h2>EVENTOS PROGRAMADOS PARA LA NOCHE</h2>
+      <div id="contenedor-eventos">
+        <div class="evento-item">
+          <strong>Los Vientos</strong><br>
+          De 19:00 a 20:30
+          <div class="botones-formulario">
+            <button type="submit">Modificar</button>
+            <button type="button">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- agregar banda -->
+    <section id="nueva-banda">
+      <h2>AGREGAR NUEVA BANDA</h2>
+      <form>
+        <label for="nombre-banda">Nombre de la Banda:</label>
+        <input type="text" id="nombre-banda" required>
+
+        <label for="hora-inicio-banda">Hora de Inicio:</label>
+        <input type="time" id="hora-inicio-banda" required>
+
+        <label for="hora-fin">Hora de Finalización:</label>
+        <input type="time" id="hora-fin" required>
+
+        <div class="botones-formulario">
+          <button type="submit">Guardar Banda</button>
+          <button type="reset">Limpiar</button>
+        </div>
+      </form>
     </section>
   </main>
 
   <footer>
     © Epsilon consultora
   </footer>
-
-  <script src="{{ url_for('static', filename='js/config_crono.js') }}"></script>
 </body>
+<!--En la parte izquierda esta el apartado de agregar una nueva noche en la cual se va a indicas la fecha y la hora de inicio de la noche, para guardarla se debe dar en el botón de guardar
+al guardarlo se crea la noche y se presenta abajo en "NOCHES", donde tenemos la opción de ver y eliminar noche.
+
+En el centro tenemos EVENTOS PROGRAMADOS PARA LA NOCHE
+donde se va a mostrar, el nombre de la banda y de que hora hasta que hora tocan, abajo tenemos la opción de modificar 
+y eliminar completamente la noche
+
+el botón MODIFICAR nos lleva a agregar banda con todos los datos ya rellenados para poder modificarlo y guardarlo
+
+En la parte derecha tenemos el apartado de AGREGAR NUEVA BANDA donde el usuario va a ingresar, nombre de la banda y de que hora a que hora tocan
+
+al darle en el botón de guardar la banda se mostrará automáticamente en EVENTOS PROGRAMADOS POR NOCHE
+
+NO HAY RAZÓN ALGUNA PARA LA MODIFICACIÓN DEL CSS, gracias por leer att:tu novio-->
 </html>
