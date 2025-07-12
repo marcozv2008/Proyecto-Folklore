@@ -9,6 +9,11 @@
       "nombre": "La Renga",
       "hora": "20:30",
       "hora_fin": "21:30"
+    },
+    {
+      "nombre": "Roberth",
+      "hora": "03:04",
+      "hora_fin": "03:05"
     }
   ],
   "15/07/2025": [
@@ -96,75 +101,6 @@
       "nombre": "Noche Polar",
       "hora": "22:30",
       "hora_fin": "23:30"
-    }
-  ],
-  "19/07/2025": [
-    {
-      "nombre": "Sombras del Este",
-      "hora": "15:00",
-      "hora_fin": "16:00"
-    },
-    {
-      "nombre": "Banda del Barro",
-      "hora": "16:00",
-      "hora_fin": "17:00"
-    },
-    {
-      "nombre": "Ruido en la Radio",
-      "hora": "17:00",
-      "hora_fin": "18:00"
-    },
-    {
-      "nombre": "Las Hijas del Viento",
-      "hora": "18:00",
-      "hora_fin": "19:00"
-    },
-    {
-      "nombre": "Cuarta Dimensión",
-      "hora": "19:00",
-      "hora_fin": "20:00"
-    }
-  ],
-  "20/07/2025": [
-    {
-      "nombre": "La Banda del Pan Casero",
-      "hora": "16:00",
-      "hora_fin": "17:00"
-    },
-    {
-      "nombre": "Electro Andes",
-      "hora": "17:00",
-      "hora_fin": "18:00"
-    },
-    {
-      "nombre": "Los Trapeadores",
-      "hora": "18:00",
-      "hora_fin": "19:00"
-    },
-    {
-      "nombre": "Corcho y los Chasquibum",
-      "hora": "19:00",
-      "hora_fin": "20:00"
-    },
-    {
-      "nombre": "Trapecistas del Sonido",
-      "hora": "20:00",
-      "hora_fin": "21:00"
-    },
-    {
-      "nombre": "Los que no eran",
-      "hora": "21:00",
-      "hora_fin": "22:00"
-    },
-    {
-      "nombre": "Fin de Fiesta",
-      "hora": "22:00",
-      "hora_fin": "23:00"
-    },
-    {
-      "nombre": "Jam Final",
-      "hora": "23:00",
-      "hora_fin": "00:00"
     }
   ]
 }
