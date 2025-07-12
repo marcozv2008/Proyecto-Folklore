@@ -8,7 +8,7 @@
 </head>
 <body>
   <div id="barra-superior">
-    <a id="boton-inicio" href="index.html">
+    <a id="boton-inicio" href="{{ url_for('index') }}">
       <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
     </a>
     <a id="boton-cronograma" href="cronograma.html">Ver cronograma</a>
