@@ -47,44 +47,57 @@
 {% endfor %}
     </section>
 
-    <!-- EVENTOS PROGRAMADOS -->
-    <section id="lista-eventos">
-      <h2>EVENTOS PROGRAMADOS PARA LA NOCHE</h2>
-      <div id="contenedor-eventos">
-        {% if eventos %}
-          {% for evento in eventos %}
-            <div class="evento-item">
-              <strong>{{ evento.nombre }}</strong><br>
-              De {{ evento.hora }} a {{ evento.hora_fin }}
-              <div class="botones-formulario">
-                <button type="submit">Modificar</button>
-                <button type="submit">Eliminar</button>
-              </div>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p>No hay eventos programados.</p>
-        {% endif %}
-      </div>
-    </section>
-
-    <!-- AGREGAR NUEVA BANDA -->
-    <section id="nueva-banda">
-      <h2>AGREGAR NUEVA BANDA</h2>
-      <form method="POST">
-        <input type="hidden" name="fecha_banda" value="{{ fecha_seleccionada }}">
-        <label>Nombre de la Banda:</label>
-        <input type="text" name="nombre" required>
-        <label>Hora de Inicio:</label>
-        <input type="time" name="hora_inicio_banda" required>
-        <label>Hora de Finalización:</label>
-        <input type="time" name="hora_fin" required>
-        <div class="botones-formulario">
-          <button type="submit">Guardar Banda</button>
-          <button type="reset">Limpiar</button>
+<!-- EVENTOS PROGRAMADOS -->
+<section id="lista-eventos">
+  <h2>EVENTOS PROGRAMADOS PARA LA NOCHE</h2>
+  <div id="contenedor-eventos">
+    {% if eventos %}
+      {% for evento in eventos %}
+        <div class="evento-item">
+          <strong>{{ evento.nombre }}</strong><br>
+          De {{ evento.hora }} a {{ evento.hora_fin }}
+          <div class="botones-formulario">
+            <!-- Botón Modificar -->
+            <form method="get" action="{{ url_for('ConfigCrono') }}" style="display:inline;">
+              <input type="hidden" name="fecha_noche" value="{{ fecha_seleccionada }}">
+              <input type="hidden" name="editar_banda" value="{{ evento.idx }}">
+              <button type="submit">Modificar</button>
+            </form>
+            <!-- Botón Eliminar -->
+            <form method="post" action="{{ url_for('ConfigCrono') }}" style="display:inline;">
+              <input type="hidden" name="fecha_banda" value="{{ fecha_seleccionada }}">
+              <input type="hidden" name="eliminar_banda" value="{{ evento.idx }}">
+              <button type="submit" class="eliminar-btn">Eliminar</button>
+            </form>
+          </div>
         </div>
-      </form>
-    </section>
+      {% endfor %}
+    {% else %}
+      <p>No hay eventos programados.</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- AGREGAR/MODIFICAR NUEVA BANDA -->
+<section id="nueva-banda">
+  <h2>{% if banda_a_editar %}MODIFICAR BANDA{% else %}AGREGAR NUEVA BANDA{% endif %}</h2>
+  <form method="POST">
+    <input type="hidden" name="fecha_banda" value="{{ fecha_seleccionada }}">
+    {% if banda_a_editar %}
+      <input type="hidden" name="modificar_banda" value="{{ idx_banda_editar }}">
+    {% endif %}
+    <label>Nombre de la Banda:</label>
+    <input type="text" name="nombre" required value="{{ banda_a_editar.nombre if banda_a_editar }}">
+    <label>Hora de Inicio:</label>
+    <input type="time" name="hora_inicio_banda" required value="{{ banda_a_editar.hora if banda_a_editar }}">
+    <label>Hora de Finalización:</label>
+    <input type="time" name="hora_fin" required value="{{ banda_a_editar.hora_fin if banda_a_editar }}">
+    <div class="botones-formulario">
+      <button type="submit">{% if banda_a_editar %}Guardar Cambios{% else %}Guardar Banda{% endif %}</button>
+      <button type="reset">Limpiar</button>
+    </div>
+  </form>
+</section>
   </main>
 
   <footer>© Epsilon consultora</footer>
