@@ -28,7 +28,20 @@ def create_app():
         elif username == 'Roberth' and password == '54321':
             return render_template('admin_pos.html')
         else:
-            return "Ono viejo hubo un error!!!"
+            return """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error</title>
+    <script>
+        alert('Hubo un error en el inicio de sesión. Por favor ingrese las credenciales correctas');
+        window.location.href = '/'; 
+    </script>
+</head>
+<body></body>
+</html>
+"""
+
 
     @app.route('/')
     def index():
