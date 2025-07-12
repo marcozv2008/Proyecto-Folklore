@@ -60,6 +60,10 @@ def create_app():
         fecha_noche = request.args.get("fecha_noche")
         eventos_noche = []
 
+        # --- NUEVO: Variables para edición de banda ---
+        banda_a_editar = None
+        idx_banda_editar = None
+
         if request.method == "POST":
             # Eliminar noche
             if 'eliminar_noche' in request.form:
@@ -68,7 +72,31 @@ def create_app():
                     eventos.pop(noche_a_eliminar)
                     guardar_eventos(eventos)
                     mensaje = f"Noche {noche_a_eliminar} eliminada."
-    # Agregar nueva noche
+            # Eliminar banda
+            elif 'eliminar_banda' in request.form:
+                fecha = request.form['fecha_banda']
+                idx = int(request.form['eliminar_banda'])
+                if fecha in eventos and 0 <= idx < len(eventos[fecha]):
+                    eventos[fecha].pop(idx)
+                    guardar_eventos(eventos)
+                    mensaje = "Banda eliminada correctamente."
+                fecha_noche = fecha  # Para que siga mostrando la noche actual
+            # Guardar banda modificada
+            elif 'modificar_banda' in request.form:
+                fecha = request.form['fecha_banda']
+                idx = int(request.form['modificar_banda'])
+                nombre = request.form['nombre']
+                hora_inicio = request.form['hora_inicio_banda']
+                hora_fin = request.form['hora_fin']
+                if fecha in eventos and 0 <= idx < len(eventos[fecha]):
+                    eventos[fecha][idx] = {
+                        "nombre": nombre,
+                        "hora": hora_inicio,
+                        "hora_fin": hora_fin
+                    }
+                    guardar_eventos(eventos)
+                    mensaje = "Banda modificada correctamente."
+                fecha_noche = fecha
             # Agregar nueva banda
             elif all(k in request.form for k in ['nombre', 'hora_inicio_banda', 'hora_fin', 'fecha_banda']):
                 fecha = request.form['fecha_banda']
@@ -93,14 +121,29 @@ def create_app():
                     guardar_eventos(eventos)
                     mensaje = "Banda agregada correctamente."
 
+        # --- NUEVO: Cargar datos para editar banda ---
+        if request.method == "GET" and "editar_banda" in request.args and "fecha_noche" in request.args:
+            fecha_noche = request.args["fecha_noche"]
+            idx_banda_editar = int(request.args["editar_banda"])
+            if fecha_noche in eventos and 0 <= idx_banda_editar < len(eventos[fecha_noche]):
+                banda_a_editar = eventos[fecha_noche][idx_banda_editar]
+
         noches = sorted(eventos.keys())
         if fecha_noche and fecha_noche in eventos:
-            eventos_noche = sorted(eventos[fecha_noche], key=lambda x: x['hora'])
+            eventos_noche = sorted(
+                [
+                    dict(banda, idx=i)
+                    for i, banda in enumerate(eventos[fecha_noche])
+                ],
+                key=lambda x: x['hora']
+            )
 
         return render_template("config_crono.html",
                                noches=noches,
                                eventos=eventos_noche,
                                fecha_seleccionada=fecha_noche,
-                               mensaje=mensaje)
+                               mensaje=mensaje,
+                               banda_a_editar=banda_a_editar,
+                               idx_banda_editar=idx_banda_editar)
 
     return app
