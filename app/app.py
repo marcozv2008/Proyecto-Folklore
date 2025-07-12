@@ -33,12 +33,11 @@ def guardar_eventos(eventos):
 def create_app():
     app = Flask(__name__)
 
- 
     @app.route('/Login', methods=['POST'])
     def Login():
         username = request.form.get('username')
         password = request.form.get('password')
-        if username == "Marco" and password == "12345" :
+        if username == "Marco" and password == "12345":
             return render_template('admin_general.html')
         elif username == 'Roberth' and password == '54321':
             return render_template('admin_pos.html')
@@ -57,7 +56,6 @@ def create_app():
 </html>
 """
 
-
     @app.route('/')
     def index():
         return render_template('index.html')
@@ -75,7 +73,7 @@ def create_app():
         fecha_noche = request.args.get("fecha_noche")
         eventos_noche = []
 
-        # --- NUEVO: Variables para edición de banda ---
+        # --- Variables para edición de banda ---
         banda_a_editar = None
         idx_banda_editar = None
 
@@ -90,6 +88,13 @@ def create_app():
                     mensaje = f"Noche {fecha} agregada correctamente."
                 else:
                     mensaje = "La noche ya existe."
+            # Eliminar noche
+            elif 'eliminar_noche' in request.form:
+                noche_a_eliminar = request.form['eliminar_noche']
+                if noche_a_eliminar in eventos:
+                    eventos.pop(noche_a_eliminar)
+                    guardar_eventos(eventos)
+                    mensaje = f"Noche {noche_a_eliminar} eliminada."
             # Eliminar banda
             elif 'eliminar_banda' in request.form:
                 fecha = request.form['fecha_banda']
@@ -145,7 +150,7 @@ def create_app():
                     guardar_eventos(eventos)
                     mensaje = "Banda agregada correctamente."
 
-        # --- NUEVO: Cargar datos para editar banda ---
+        # --- Cargar datos para editar banda ---
         if request.method == "GET" and "editar_banda" in request.args and "fecha_noche" in request.args:
             fecha_noche = request.args["fecha_noche"]
             idx_banda_editar = int(request.args["editar_banda"])
