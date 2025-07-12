@@ -1,6 +1,21 @@
 from flask import Flask, request, render_template, redirect, url_for
 import json
 import os
+from datetime import datetime
+
+def hay_solapamiento(nueva_inicio, nueva_fin, bandas, idx_ignorar=None):
+    fmt = "%H:%M"
+    nueva_inicio = datetime.strptime(nueva_inicio, fmt)
+    nueva_fin = datetime.strptime(nueva_fin, fmt)
+    for idx, banda in enumerate(bandas):
+        if idx == idx_ignorar:
+            continue  # Ignora la banda que se está editando
+        inicio = datetime.strptime(banda['hora'], fmt)
+        fin = datetime.strptime(banda['hora_fin'], fmt)
+        # Si los intervalos se solapan
+        if not (nueva_fin <= inicio or nueva_inicio >= fin):
+            return True
+    return False
 
 def cargar_eventos():
     path = os.path.join(os.path.dirname(__file__), 'eventos.json')
@@ -92,14 +107,19 @@ def create_app():
                 hora_inicio = request.form['hora_inicio_banda']
                 hora_fin = request.form['hora_fin']
                 if fecha in eventos and 0 <= idx < len(eventos[fecha]):
-                    eventos[fecha][idx] = {
-                        "nombre": nombre,
-                        "hora": hora_inicio,
-                        "hora_fin": hora_fin
-                    }
-                    guardar_eventos(eventos)
-                    mensaje = "Banda modificada correctamente."
+                    # Validar solapamiento (ignorando la banda que se está editando)
+                    if hay_solapamiento(hora_inicio, hora_fin, eventos[fecha], idx_ignorar=idx):
+                        mensaje = "Ya existe una banda en ese horario."
+                    else:
+                        eventos[fecha][idx] = {
+                            "nombre": nombre,
+                            "hora": hora_inicio,
+                            "hora_fin": hora_fin
+                        }
+                        guardar_eventos(eventos)
+                        mensaje = "Banda modificada correctamente."
                 fecha_noche = fecha
+
             # Agregar nueva banda
             elif all(k in request.form for k in ['nombre', 'hora_inicio_banda', 'hora_fin', 'fecha_banda']):
                 fecha = request.form['fecha_banda']
@@ -108,13 +128,14 @@ def create_app():
                 hora_fin = request.form['hora_fin']
 
                 # Validar duración
-                from datetime import datetime
                 fmt = "%H:%M"
                 duracion = (datetime.strptime(hora_fin, fmt) - datetime.strptime(hora_inicio, fmt)).seconds // 60
                 if duracion > 150:
                     mensaje = "Una banda no puede tocar más de 150 minutos."
                 elif fecha not in eventos:
                     mensaje = "Primero debes crear la noche."
+                elif hay_solapamiento(hora_inicio, hora_fin, eventos[fecha]):
+                    mensaje = "Ya existe una banda en ese horario."
                 else:
                     eventos[fecha].append({
                         "nombre": nombre,
