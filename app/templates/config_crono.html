@@ -4,84 +4,81 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Configurar Cronograma</title>
-  <link rel="stylesheet" href="css/configuracion_del_cronograma.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/config_crono.css') }}">
 </head>
 <body>
   <div id="barra-superior">
-    <a id="boton-inicio" href="">
-      <img src="img/inicio.png" alt="Inicio" />
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
     </a>
     <h1>Configuración del Cronograma</h1>
   </div>
 
   <main>
-    <!-- agregar nuevo día -->
+    <!-- AGREGAR UNA NUEVA NOCHE -->
     <section id="formulario-config">
       <h2>AGREGAR UNA NUEVA NOCHE</h2>
-      <form>
+      <form method="POST">
         <label for="fecha">Fecha:</label>
-        <input type="date" id="fecha" required>
-        <label for="hora-inicio">Hora inicio:</label>
-        <input type="time" id="hora-inicio" required>
+        <input type="date" name="fecha" required>
+        <label for="hora_inicio">Hora inicio:</label>
+        <input type="time" name="hora_inicio" required>
         <div class="botones-formulario">
           <button type="submit">Guardar</button>
-          <button type="button">Cancelar</button>
+          <button type="reset">Cancelar</button>
         </div>
       </form>
 
       <h2>NOCHES</h2>
-      <!-- NOCHES -->
-      <div class="banda-item">
-        <strong>14/07/2025</strong>
-        <div class="botones-noche">
-          <button type="submit">Ver</button>
-          <button type="button">Eliminar</button>
-        </div>
-      </div>
-      <div class="banda-item">
-        <strong>15/07/2025</strong>
-        <div class="botones-noche">
-          <button type="submit">Ver</button>
-          <button type="button">Eliminar</button>
-        </div>
-      </div>
-      <div class="banda-item">
-        <strong>16/07/2025</strong>
-        <div class="botones-noche">
-          <button type="submit">Ver</button>
-          <button type="button">Eliminar</button>
-        </div>
-      </div>
+{% for fecha in noches %}
+  <div class="banda-item">
+    <strong>{{ fecha }}</strong>
+    <div class="botones-noche">
+      <form method="get" action="{{ url_for('ConfigCrono') }}" style="display:inline;">
+        <input type="hidden" name="fecha_noche" value="{{ fecha }}">
+        <button type="submit">Ver</button>
+      </form>
+      <form method="post" action="{{ url_for('ConfigCrono') }}" style="display:inline;">
+        <input type="hidden" name="eliminar_noche" value="{{ fecha }}">
+        <button type="submit" class="eliminar-btn">Eliminar</button>
+      </form>
+    </div>
+  </div>
+{% endfor %}
     </section>
 
-    <!-- eventos programados -->
+    <!-- EVENTOS PROGRAMADOS -->
     <section id="lista-eventos">
       <h2>EVENTOS PROGRAMADOS PARA LA NOCHE</h2>
       <div id="contenedor-eventos">
-        <div class="evento-item">
-          <strong>Los Vientos</strong><br>
-          De 19:00 a 20:30
-          <div class="botones-formulario">
-            <button type="submit">Modificar</button>
-            <button type="button">Eliminar</button>
-          </div>
-        </div>
+        {% if eventos %}
+          {% for evento in eventos %}
+            <div class="evento-item">
+              <strong>{{ evento.nombre }}</strong><br>
+              De {{ evento.hora }} a {{ evento.hora_fin }}
+              <div class="botones-formulario">
+                <button type="submit">Modificar</button>
+                <button type="submit">Eliminar</button>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No hay eventos programados.</p>
+        {% endif %}
       </div>
     </section>
 
-    <!-- agregar banda -->
+    <!-- AGREGAR NUEVA BANDA -->
     <section id="nueva-banda">
       <h2>AGREGAR NUEVA BANDA</h2>
-      <form>
-        <label for="nombre-banda">Nombre de la Banda:</label>
-        <input type="text" id="nombre-banda" required>
-
-        <label for="hora-inicio-banda">Hora de Inicio:</label>
-        <input type="time" id="hora-inicio-banda" required>
-
-        <label for="hora-fin">Hora de Finalización:</label>
-        <input type="time" id="hora-fin" required>
-
+      <form method="POST">
+        <input type="hidden" name="fecha_banda" value="{{ fecha_seleccionada }}">
+        <label>Nombre de la Banda:</label>
+        <input type="text" name="nombre" required>
+        <label>Hora de Inicio:</label>
+        <input type="time" name="hora_inicio_banda" required>
+        <label>Hora de Finalización:</label>
+        <input type="time" name="hora_fin" required>
         <div class="botones-formulario">
           <button type="submit">Guardar Banda</button>
           <button type="reset">Limpiar</button>
@@ -90,10 +87,10 @@
     </section>
   </main>
 
-  <footer>
-    © Epsilon consultora
-  </footer>
+  <footer>© Epsilon consultora</footer>
 </body>
+</html>
+
 <!--En la parte izquierda esta el apartado de agregar una nueva noche en la cual se va a indicas la fecha y la hora de inicio de la noche, para guardarla se debe dar en el botón de guardar
 al guardarlo se crea la noche y se presenta abajo en "NOCHES", donde tenemos la opción de ver y eliminar noche.
 
@@ -108,4 +105,3 @@ En la parte derecha tenemos el apartado de AGREGAR NUEVA BANDA donde el usuario 
 al darle en el botón de guardar la banda se mostrará automáticamente en EVENTOS PROGRAMADOS POR NOCHE
 
 NO HAY RAZÓN ALGUNA PARA LA MODIFICACIÓN DEL CSS, gracias por leer att:tu novio-->
-</html>
