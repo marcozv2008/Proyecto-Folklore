@@ -65,13 +65,16 @@ def create_app():
         idx_banda_editar = None
 
         if request.method == "POST":
-            # Eliminar noche
-            if 'eliminar_noche' in request.form:
-                noche_a_eliminar = request.form['eliminar_noche']
-                if noche_a_eliminar in eventos:
-                    eventos.pop(noche_a_eliminar)
+            # Agregar nueva noche
+            if 'fecha' in request.form and 'hora_inicio' in request.form:
+                fecha = request.form['fecha']
+                hora_inicio = request.form['hora_inicio']
+                if fecha not in eventos:
+                    eventos[fecha] = []
                     guardar_eventos(eventos)
-                    mensaje = f"Noche {noche_a_eliminar} eliminada."
+                    mensaje = f"Noche {fecha} agregada correctamente."
+                else:
+                    mensaje = "La noche ya existe."
             # Eliminar banda
             elif 'eliminar_banda' in request.form:
                 fecha = request.form['fecha_banda']
