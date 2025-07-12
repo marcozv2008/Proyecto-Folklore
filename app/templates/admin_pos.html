@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AdministracionPOS</title>
-  <link rel="stylesheet" href="css/administración_general.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_general.css') }}">
 </head>
 <body>
   <div id="barra-superior">
-    <a id="boton-inicio" href="index.html">
-      <img src="/img/inicio.png" alt="Inicio" />
+    <a id="boton-inicio" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/inicio.png') }}" alt="Inicio" />
     </a>
     <a id="boton-cronograma" href="cronograma.html">Ver cronograma</a>
   </div>
